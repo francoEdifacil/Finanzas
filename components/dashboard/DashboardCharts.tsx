@@ -60,6 +60,7 @@ export function DashboardCharts({ categoryData, vendorData }: DashboardChartsPro
                                     boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
                                 }}
                                 itemStyle={{ color: '#fafafa' }}
+                                formatter={(value: any) => [`$${value}`, 'Gasto']}
                             />
                             <Legend verticalAlign="bottom" height={36} />
                         </PieChart>
@@ -106,7 +107,8 @@ export function DashboardCharts({ categoryData, vendorData }: DashboardChartsPro
                                     boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
                                 }}
                                 itemStyle={{ color: '#fafafa' }}
-                                formatter={(value: any) => [`$${value}`, 'Gasto']}
+                                // Fix for Recharts undefined type in deployment
+                                formatter={(value: any) => [`$${value ?? 0}`, 'Gasto']}
                             />
                             <Bar
                                 dataKey="value"
