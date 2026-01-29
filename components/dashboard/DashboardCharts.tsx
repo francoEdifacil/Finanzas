@@ -106,7 +106,7 @@ export function DashboardCharts({ categoryData, vendorData }: DashboardChartsPro
                                     boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
                                 }}
                                 itemStyle={{ color: '#fafafa' }}
-                                formatter={(value: number) => [`$${value}`, 'Gasto']}
+                                formatter={(value: any) => [`$${value}`, 'Gasto']}
                             />
                             <Bar
                                 dataKey="value"
