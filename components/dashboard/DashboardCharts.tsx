@@ -1,4 +1,6 @@
 'use client'
+// Versión: 1.0.1 - Build Fix
+
 
 import {
     Bar,
@@ -107,9 +109,10 @@ export function DashboardCharts({ categoryData, vendorData }: DashboardChartsPro
                                     boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
                                 }}
                                 itemStyle={{ color: '#fafafa' }}
-                                // Fix for Recharts undefined type in deployment
+                                // Fix definitivo: usando any para evitar errores de tipos en producción
                                 formatter={(value: any) => [`$${value ?? 0}`, 'Gasto']}
                             />
+
                             <Bar
                                 dataKey="value"
                                 fill="url(#barGradient)"
