@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground space-y-4">
       <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl">
-        Coste de Vida Digital
+        Controla Tus Gastos
       </h1>
       <p className="max-w-[600px] text-center text-muted-foreground md:text-xl">
         Controla tus suscripciones de software y servicios en un solo lugar.

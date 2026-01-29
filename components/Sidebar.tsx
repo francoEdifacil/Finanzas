@@ -40,7 +40,7 @@ export function Sidebar() {
     return (
         <div className="flex h-screen w-64 flex-col border-r bg-card text-card-foreground">
             <div className="flex h-16 items-center border-b px-6">
-                <h1 className="text-xl font-bold text-primary">DigitalCost</h1>
+                <h1 className="text-xl font-bold text-primary">GastoControl</h1>
             </div>
             <div className="flex-1 overflow-y-auto py-4">
                 <nav className="grid items-start px-4 text-sm font-medium">

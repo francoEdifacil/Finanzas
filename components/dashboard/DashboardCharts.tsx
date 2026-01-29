@@ -25,9 +25,9 @@ const COLORS = ['#8B5CF6', '#EC4899', '#3B82F6', '#10B981', '#F59E0B', '#EF4444'
 export function DashboardCharts({ categoryData, vendorData }: DashboardChartsProps) {
     return (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-            <Card>
+            <Card className="overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm">
                 <CardHeader>
-                    <CardTitle>Gastos por Categoría</CardTitle>
+                    <CardTitle className="text-lg font-medium">Gastos por Categoría</CardTitle>
                 </CardHeader>
                 <CardContent className="h-[300px]">
                     <ResponsiveContainer width="100%" height="100%">
@@ -37,40 +37,83 @@ export function DashboardCharts({ categoryData, vendorData }: DashboardChartsPro
                                 cx="50%"
                                 cy="50%"
                                 labelLine={false}
-                                outerRadius={80}
-                                fill="#8884d8"
+                                innerRadius={70}
+                                outerRadius={90}
+                                paddingAngle={5}
                                 dataKey="value"
                             >
                                 {categoryData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    <Cell
+                                        key={`cell-${index}`}
+                                        fill={COLORS[index % COLORS.length]}
+                                        stroke="rgba(255,255,255,0.1)"
+                                        strokeWidth={1}
+                                    />
                                 ))}
                             </Pie>
                             <Tooltip
-                                contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a' }}
+                                contentStyle={{
+                                    backgroundColor: 'rgba(24, 24, 27, 0.8)',
+                                    borderColor: 'rgba(39, 39, 42, 0.5)',
+                                    borderRadius: '8px',
+                                    backdropFilter: 'blur(8px)',
+                                    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+                                }}
                                 itemStyle={{ color: '#fafafa' }}
                             />
-                            <Legend />
+                            <Legend verticalAlign="bottom" height={36} />
                         </PieChart>
                     </ResponsiveContainer>
                 </CardContent>
             </Card>
 
-            <Card>
+            <Card className="overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm">
                 <CardHeader>
-                    <CardTitle>Top Proveedores</CardTitle>
+                    <CardTitle className="text-lg font-medium">Top Proveedores</CardTitle>
                 </CardHeader>
                 <CardContent className="h-[300px]">
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={vendorData}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
-                            <XAxis dataKey="name" stroke="#a1a1aa" fontSize={12} />
-                            <YAxis stroke="#a1a1aa" fontSize={12} />
-                            <Tooltip
-                                cursor={{ fill: 'transparent' }}
-                                contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a' }}
-                                itemStyle={{ color: '#fafafa' }}
+                            <defs>
+                                <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stopColor="#8B5CF6" stopOpacity={1} />
+                                    <stop offset="100%" stopColor="#6D28D9" stopOpacity={0.8} />
+                                </linearGradient>
+                            </defs>
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(39, 39, 42, 0.5)" />
+                            <XAxis
+                                dataKey="name"
+                                stroke="#71717a"
+                                fontSize={11}
+                                tickLine={false}
+                                axisLine={false}
+                                dy={10}
                             />
-                            <Bar dataKey="value" fill="#8B5CF6" radius={[4, 4, 0, 0]} />
+                            <YAxis
+                                stroke="#71717a"
+                                fontSize={11}
+                                tickLine={false}
+                                axisLine={false}
+                                tickFormatter={(value) => `$${value}`}
+                            />
+                            <Tooltip
+                                cursor={{ fill: 'rgba(255, 255, 255, 0.05)', radius: 4 }}
+                                contentStyle={{
+                                    backgroundColor: 'rgba(24, 24, 27, 0.8)',
+                                    borderColor: 'rgba(39, 39, 42, 0.5)',
+                                    borderRadius: '8px',
+                                    backdropFilter: 'blur(8px)',
+                                    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+                                }}
+                                itemStyle={{ color: '#fafafa' }}
+                                formatter={(value: number) => [`$${value}`, 'Gasto']}
+                            />
+                            <Bar
+                                dataKey="value"
+                                fill="url(#barGradient)"
+                                radius={[6, 6, 0, 0]}
+                                barSize={40}
+                            />
                         </BarChart>
                     </ResponsiveContainer>
                 </CardContent>
@@ -78,3 +121,4 @@ export function DashboardCharts({ categoryData, vendorData }: DashboardChartsPro
         </div>
     )
 }
+
